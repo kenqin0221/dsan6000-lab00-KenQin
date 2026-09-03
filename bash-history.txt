@@ -1,0 +1,16 @@
+ 1023  git clean -fd test-environment
+ 1024  cd test-environment
+ 1025  ls -F
+ 1026  mkdir -p docs models data/input data/output src/notebooks src/scripts temp\n
+ 1027  ls -F
+ 1028  ls *old* *DELETE*
+ 1029  rm *old* *DELETE*
+ 1030  ls -F
+ 1031  ls | wc -l > temp-numfiles.txt\ncat temp-numfiles.txt
+ 1032  # temp-related files -> temp/  (this also catches temp-numfiles.txt we just made)\nmv temp-* temp/\n\n# markdown docs -> docs/\nmv *.md docs/\n\n# model artifacts -> models/\nmv *.pkl *.h5 models/\n\n# raw/source csv inputs -> data/input/\nmv in-data-part*.csv data/input/\n\n# derived/results csv outputs -> data/output/\nmv *-output.csv data/output/\n\n# notebooks -> src/notebooks/\nmv *.ipynb src/notebooks/\n\n# scripts -> src/scripts/\nmv *.py src/scripts/
+ 1033  ls -F
+ 1034  find . -type f | sort
+ 1035  cd ..\ngit status
+ 1036  git add test-environment
+ 1037  git commit -m "Task 2: organize test-environment into docs/models/data/src/temp"
+ 1038  git push origin main
