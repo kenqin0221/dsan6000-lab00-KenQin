@@ -1,0 +1,28 @@
+{
+  "name": "Budget Inn",
+  "city": "Boston",
+  "rating": 3.2,
+  "rooms": 45,
+  "price": 89
+}
+{
+  "name": "Economy Stay",
+  "city": "Austin",
+  "rating": 2.9,
+  "rooms": 60,
+  "price": 65
+}
+{
+  "name": "Quick Rest",
+  "city": "Denver",
+  "rating": 3.5,
+  "rooms": 55,
+  "price": 95
+}
+{
+  "name": "Simple Sleep",
+  "city": "Portland",
+  "rating": 3.1,
+  "rooms": 40,
+  "price": 75
+}

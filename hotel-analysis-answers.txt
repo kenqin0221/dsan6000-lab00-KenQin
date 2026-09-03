@@ -1,0 +1,11 @@
+1. How many hotels have more than 100 rooms?
+Answer: jq '[.hotels[] | select(.rooms > 100)] | length' hotels.json -> 5
+
+2. What's the average rating of all hotels?
+Answer: jq '[.hotels[].rating] | add / length' hotels.json -> 3.9
+
+3. Which city has the highest-priced hotel?
+Answer: jq -r '.hotels | max_by(.price) | .city' hotels.json -> Las Vegas
+
+4. Create a file with just budget hotels (price < $100)
+Answer: jq '.hotels[] | select(.price < 100)' hotels.json > budget-hotels.json -> created budget-hotels.json (4 hotels: Budget Inn, Economy Stay, Quick Rest, Simple Sleep)

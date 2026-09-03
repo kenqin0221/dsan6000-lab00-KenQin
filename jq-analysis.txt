@@ -1,0 +1,83 @@
+=== Command 1: Count total hotels ===
+$ jq '.hotels | length' hotels.json
+10
+
+=== Command 2: Find hotels with rating less than 4 stars ===
+$ jq '.hotels[] | select(.rating < 4)' hotels.json
+{
+  "name": "Budget Inn",
+  "city": "Boston",
+  "rating": 3.2,
+  "rooms": 45,
+  "price": 89
+}
+{
+  "name": "City Lodge",
+  "city": "Chicago",
+  "rating": 3.8,
+  "rooms": 120,
+  "price": 120
+}
+{
+  "name": "Economy Stay",
+  "city": "Austin",
+  "rating": 2.9,
+  "rooms": 60,
+  "price": 65
+}
+{
+  "name": "Quick Rest",
+  "city": "Denver",
+  "rating": 3.5,
+  "rooms": 55,
+  "price": 95
+}
+{
+  "name": "Simple Sleep",
+  "city": "Portland",
+  "rating": 3.1,
+  "rooms": 40,
+  "price": 75
+}
+
+=== Command 3: Count hotels with less than 4 star rating ===
+$ jq '[.hotels[] | select(.rating < 4)] | length' hotels.json
+5
+
+=== Command 4: Get names of low-rated hotels ===
+$ jq '.hotels[] | select(.rating < 4) | .name' hotels.json
+"Budget Inn"
+"City Lodge"
+"Economy Stay"
+"Quick Rest"
+"Simple Sleep"
+
+=== Command 5: Create a CSV of hotel names and ratings ===
+$ jq -r '.hotels[] | [.name, .rating] | @csv' hotels.json > hotel_ratings.csv
+"Grand Plaza",4.5
+"Budget Inn",3.2
+"Luxury Suites",4.8
+"City Lodge",3.8
+"Economy Stay",2.9
+"Comfort Zone",4.1
+"Quick Rest",3.5
+"Elite Resort",4.9
+"Simple Sleep",3.1
+"Business Hotel",4.2
+
+=== Command 6: Use sed and cut on the CSV we created ===
+$ cut -d',' -f1 hotel_ratings.csv | sed 's/"//g'
+Grand Plaza
+Budget Inn
+Luxury Suites
+City Lodge
+Economy Stay
+Comfort Zone
+Quick Rest
+Elite Resort
+Simple Sleep
+Business Hotel
+
+=== Command 7: Count hotels with Inn or Lodge in the name ===
+$ jq -r '.hotels[].name' hotels.json | grep -E '(Inn|Lodge)' | wc -l
+       2
